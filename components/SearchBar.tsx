@@ -5,8 +5,8 @@ import { Image, TextInput, View } from "react-native";
 interface ISearchBarProps {
   onPress?: () => void;
   placeholder: string;
-  value: string;
-  onChangeText: (text: string) => void;
+  value?: string;
+  onChangeText?: (text: string) => void;
 }
 
 const SearchBar = ({

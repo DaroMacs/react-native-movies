@@ -4,6 +4,7 @@ import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import useFetch from "@/hooks/useFetch";
 import fetchMovies from "@/services/api";
+import { updateSearchCount } from "@/services/appwrite";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 
@@ -21,7 +22,6 @@ const Search = () => {
   useEffect(() => {
     const getMovies = setTimeout(async () => {
       if (searchQuery.trim()) {
-        console.log(searchQuery);
         await fetchData();
       } else {
         reset();
@@ -31,6 +31,12 @@ const Search = () => {
     return () => clearTimeout(getMovies);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
+
+  useEffect(() => {
+    if (movies && movies.length > 0 && movies?.[0]) {
+      updateSearchCount(searchQuery, movies[0]);
+    }
+  }, [movies]);
 
   return (
     <View className="flex-1 bg-primary">
