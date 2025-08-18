@@ -29,6 +29,7 @@ const Search = () => {
     }, 500);
 
     return () => clearTimeout(getMovies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (
