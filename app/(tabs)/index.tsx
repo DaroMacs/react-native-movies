@@ -1,11 +1,19 @@
 import SearchBar from "@/components/SearchBar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
+import useFetch from "@/hooks/useFetch";
+import fetchMovies from "@/services/api";
 import { useRouter } from "expo-router";
-import { Image, ScrollView, View } from "react-native";
+import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
+
+  const {
+    data: movies,
+    error,
+    isLoading,
+  } = useFetch(() => fetchMovies({ query: "" }));
 
   return (
     <View className="flex-1 bg-primary">
@@ -26,6 +34,16 @@ export default function Index() {
             }}
             placeholder="Search for a movie"
           />
+
+          {isLoading && (
+            <ActivityIndicator size="large" color="#ab8bff" className="mt-5" />
+          )}
+
+          {movies?.results.map((movie: Movie) => (
+            <Text className="text-white" key={movie.id}>
+              {movie.title}
+            </Text>
+          ))}
         </View>
       </ScrollView>
     </View>
