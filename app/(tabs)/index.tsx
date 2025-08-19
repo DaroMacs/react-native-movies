@@ -4,7 +4,7 @@ import TrendingCard from "@/components/TrendingCard";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import useFetch from "@/hooks/useFetch";
-import fetchMovies from "@/services/api";
+import { fetchMovies } from "@/services/api";
 import { getTrendingMovies } from "@/services/appwrite";
 import { useRouter } from "expo-router";
 import {
